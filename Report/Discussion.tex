@@ -1,0 +1,465 @@
+\section*{Discussion}
+\quot{What is translation? On a platter \\ A poet's pale and glaring
+  head}{Vladimir Nabokov}
+\paragraph{}{Following the heavy math of the previous section, I
+  return here to the crux of the problem: poetry, and translating
+  it. To dig into the meat of the problem, let's consider an exemplar
+  poem, and how we might approach translating it, both by hand and
+  computationally. }
+
+\paragraph{}{Vladimir Nabokov, in the notes of his controversial
+  translation of Aleksandr Pushkin's work `Eugene Onegin'
+  \cite{nabokov, nabokovtheory}, argues that all translations of poetry will
+  inevitably fall under three categories:}
+  \begin{description}
+  \item [Paraphrastic] A free version of the original: words and
+    phrases are toyed with --- added, removed, or changed --- in order
+    to conform to some form that the translator wishes.
+  \item [Lexical] Translating the basic meaning of words and their
+    order.
+  \item [Literal] Translating as closely as possible the original,
+    with the exact contextual meaning being preserved.
+  \end{description}
+
+  \paragraph{}{Nabokov believed that only the final item, literal
+    translation, was a `true' translation, and all others only served
+    to tarnish the poem:}
+  \begin{displayquote}
+    The hack who has never read the original, and does not know its
+    language, praises an imitation as readable because easy platitudes
+    have replaced in it the intricacies of which he is unaware.
+  \end{displayquote}
+  \paragraph{}{Nabokov's translation of `Eugene Onegin', predictably,
+    fell into the `literal' camp of translation. The original poem
+    consisted of stanzas of iambic tetrameter, with the rhyme scheme
+    `AbAbCCddEffEgg'. Note that uppercase letters represent
+      feminine rhymes (a rhyme which matches two or more syllables, in
+      which the final syllables are unstressed), and lowercase letters
+      represent masculine rhymes (a rhyme with matches only one
+      syllable, which is stressed). Nabokov argued that ``to
+    reproduce the rhymes and yet translate the entire poem literally
+    is mathematically impossible'', and as such decided to eschew
+    translating the rhyme scheme: his final version contained no
+    rhymes, but translated meticulously every word of vocabulary and
+    every structural choice which Pushkin made while writing the poem,
+    as well as containing extensive commentary. It is considered the
+    most `faithful' translation of the original, and it serves as a
+    useful gloss for those wanting to read the original poem, but not
+    possessing a suitable level of Russian.  }
+
+  \paragraph{}{With these three options in mind, let's explore the
+    manual and computational approaches one may take to translating
+    what is considered to be one of the most beautiful works in the
+    German language\cite{goethe}: Goethe's `{\"U}ber allen Gipfeln'
+  \footnote{Also called `Wanderer's Nightsong II', as it is the
+      second part of Goethe's `Wandrers Nachtlied' series. } Here is
+    the text of the original: \\}
+
+% Hacky fix, needs to stay on one line
+\begin{minipage}{0.8\linewidth}
+  \begin{verse}
+
+    {\"U}ber allen Gipfeln \\
+    Ist Ruh, \\
+    In allen Wipfeln \\
+    Sp{\"u}rest du \\
+    Kaum einen Hauch; \\
+    Die V{\"o}gelein schweigen im Walde. \\
+    Warte nur, balde \\
+    Ruhest du auch.
+  \end{verse}
+  \attrib{Johann Wolfgang von Goethe (1749--1832)}
+\end{minipage}
+
+\paragraph{}{Firstly, let us consider a lexical translation --- that
+  is, a translation which considers only the basic preservation of
+  words and their order. The following gloss was done using an
+  English-German dictionary, with alternative words marked using
+  slashes: \\}
+
+% \begin{minipage}{0.8\linewidth}
+  \begin{verse}
+    Over all peaks\slash summits\slash tops \\
+    Is rest\slash peace\slash silence, \\
+    In all treetops \\
+    You (informal) sense\slash feel \\
+    Hardly a breath\slash breeze; \\
+    The little birds remain silent\slash keep still in the wood\slash forest. \\
+    Just wait, soon \\
+    You rest\slash repose too\slash also. \\
+  \end{verse}
+  \attrib{TU Chemnitz Dictionary\cite{beo}}
+% \end{minipage}
+
+  \paragraph{}{Doing this by hand only requires a bilingual dictionary
+    and knowledge of the target language: as such, a computational
+    approach would, at most, require access to a good English-German
+    dictionary. This is, then, the simplest computational approach,
+    requiring no large amounts of mathematics or programming. Note how
+    the rhyme scheme has not been preserved, excepting the duplication
+    of `tops' in lines 1 and 3,\footnote{While this is technically a
+      rhyme, a poet using a word as its own rhyme is committing a
+      crime against poetry.} or the half-rhyme of peaks-peace in lines
+    1 and 2. Looking at preservation of rhythm is pointless, because
+    the translation purposely sacrifices ease of reading for
+    completeness of translation: it would not make sense to read this
+    poem aloud.\footnote{Unless one is E.E. Cummings, in which case it
+      is fine.}}
+
+\paragraph{}{Next, consider what Nabokov would have called the
+  paraphrastic version: John Whaley's translation, which hangs on a
+  plaque in a reproduction of the cabin where Goethe wrote the
+  original poem: \\}
+
+\begin{minipage}{0.8\linewidth}
+  \begin{verse}
+    Over all of the hills \\
+    Peace comes anew, \\
+    The woodland stills \\
+    All through; \\ 
+    The birds make no sound on the bough. \\
+    Wait a while, \\
+    Soon now \\
+    Peace comes to you. \\
+  \end{verse}
+  \attrib{John Whaley}
+\end{minipage}
+
+\paragraph{}{Let us consider which parts of the original poem this
+  translation preserves, and which parts it changes. The rhyme scheme
+  of the original is {\it ababcddc}; the translation, on the other
+  hand, is {\it ababcdcb} --- so the rhyme scheme has been preserved
+  to an extent. But to allow for this preservation of rhyme scheme,
+  the poem has been altered in a way that would disgust Nabokov. The
+  first line is translated in the same way. The second line goes from
+  `is peace' to `peace comes anew' --- a change in tense which is only
+  done to allow a rhyme two lines later. The rest of the poem has been
+  completely altered: it goes from `in all treetops, you feel hardly a
+  breath' to `the woodland stills all though'; the birds move from the
+  forest to the bough; and instead of you finding peace, the peace
+  comes to you.}
+\paragraph{}{The original poem is considered one of the most beautiful
+  works in the German language, primarily for two reasons. The first
+  is the contrast Goethe draws between man and nature: man is
+  restless, uncomfortable in the silence of the forest but expecting
+  of death's eternal peace. On the other hand, nature is united in its
+  silence. The scale of the poem is also interesting: it moves from a
+  large scale (the summits), to a middle distance (the treetops), to
+  the immediate surroundings (in the forest), and finally to the
+  person. This sequence can be seen as encompassing the human
+  universe, moving from the largest (visible from a forest) scale, to
+  the smallest, most personal. The translation of the poem loses the
+  large scale (summits turn to hills), although it preserves the progression
+  of scale reduction. But man's restlessness is lost: instead of man
+  having to wait for eternal peace, it becomes peace coming to man.}
+\paragraph{}{Instead of looking at this poem as a translation of
+  Goethe's original, it might be better to look at it as a poetic work
+  in its own right. Looking at it from that point of view, it is very
+  much a good poem. There is a good rhythm, a good rhyme scheme, and
+  it reads well: and, while there is not necessarily the same level of
+  conciseness and beauty that Goethe's poem shows, it is still a read
+  to be savored.}
+\paragraph{}{It is worth discussing here the work of Douglas
+  Hofstadter in his book `Le Ton Beau de Marot' \cite{hof}. The book
+  covers possible translations of the Cl\'{e}ment Marot's `Ma
+  Mignonne': by exploring various possible translations, the author
+  explores a wide range of topics in linguistics, psychology, and
+  mathematical theory. Hofstadter is perhaps the most vocal supporter
+  (outside of translation circles) of the paraphrastic approach to
+  translation. The book contains a multitude of possible translations
+  and transformations of the poem, most of which are barely
+  recognizable to be related to the original. They are good reads,
+  just as Whaley's translation is a good read. But they do not stay
+  faithful to the original. While intended to be a proof of the
+  superiority of the paraphrastic approach to translation, what
+  Hofstadter's book really shows us is the unsuitability of
+  paraphrastic translation to preserving the context and meaning of
+  the poem. Instead, it can be seen as proof that paraphrastic
+  translation creates a new, distinct poem.  }
+
+\paragraph{}{How would one go about manually taking the literal
+  approach to this poem? I believe the task is beyond the scope of
+  this report. The main issue is that there is a deep understanding of
+  both languages required: Nabokov himself was bilingual in both
+  English and Russian from childhood, and thus had the kind of
+  intimate understanding of both languages and cultures which I
+  simply do not possess. Additionally, there are time constraints:
+  Nabokov's own translation took many years of research
+  \cite{nabokov}, and the time frame for this project was
+  limited. Perhaps one might start with exploring Goethe's background,
+  his other poetry, and so on, and explore the area, working and
+  reworking a translation in much the same way as the poet might have,
+  until a suitably literal translation is reached.}
+
+\paragraph{}{Considering all of the above, what is the best
+  computational approach we could take to translate poetry? Manually,
+  the best approach, in my opinion, is the literal approach: a
+  preservation of the original poem's contextual meaning. A
+  computational literal translation can be considered to be under the
+  umbrella of `AI-complete' problems. Paraphrastic translation, for
+  all Nabokov disparaged it, is a good computational option: while it
+  does not preserve the original, it does create a new poem which, as
+  seen above, is still worth reading in its own right: it is also
+  easier, computationally, to implement.}
+
+\paragraph{}{To get an idea of what we're working with, here is how
+  Google Translate, arguably the most popular translation service
+  today, translates the poem.\footnote{It must be noted here that as
+    of 2016, Google Translate uses neural machine translation for
+    English $\leftrightarrow$ German translation, the explanation and
+    analysis of which is beyond the scope of this report. I will be
+    focusing only on the types of translation I outlined in the theory
+    section; nonetheless, analyzing its poetic output is an
+    interesting exercise. }\\}
+
+\begin{minipage}{0.8\linewidth}
+  \begin{verse}
+    Above all peaks \\
+    Is peace, \\
+    In all tops \\
+    Do you feel \\
+    Hardly a breath; \\
+    The birds are silent in the forest. \\
+    wait, soon \\ 
+    Are you retiring too? \\
+  \end{verse}
+  \attrib{Google Translate}
+\end{minipage}
+
+\paragraph{}{The first thing to notice about this translation is its
+  somewhat perplexing tendency towards converting statements to
+  questions. `Sp{\"u}rest du' becomes `do you feel' --- a reasonable
+  mistake to make, because the German language does not use an
+  auxiliary (`do') to indicate a question: it simply reverses the verb
+  and the noun to indicate its presence. However, the following and
+  preceding lines make it clear that this is not an isolated phrase,
+  which could be interpreted as a question, but rather part of a
+  sentence clause. Another interesting thing is the vocabulary
+  choices: `Gipfeln' is translated to `peaks', as opposed to the more
+  common translation `summits'; the word `nur' is also cut completely,
+  which eliminates the feeling of urgency and restlessness which its
+  use in the original poem implies.}
+
+\paragraph{}{My research has consisted of hypothesizing changes to
+  current (word- and phrase-based) machine translation methods which
+  would allow for more fluent poetic output, compared to the type
+  shown above. I have developed three
+  hypotheses:}
+\begin{enumerate}
+\item Training the language and alignment models on a poetic corpus
+  improves poetic qualities of the output translation.
+\item Altering the sentence alignment model for poetic works will
+  improve line-by-line translation quality.
+\item Poetic characteristics can be preserved by constraints on the
+  hypothesis space, or recovered by post-processing of the output
+  translation.
+\end{enumerate}
+
+\paragraph{Poetic corpus}{I would argue that statistical translation
+  of poetry faces the same problem as statistical modeling of
+  language: we simply have no way of truly modeling the poet's thought
+  processes while writing the original, and therefore no way of
+  emulating it computationally. So, again, we have to compromise:
+  instead of seeking to emulate the thought process, we instead seek
+  to statistically model poetry in such a way that our translation
+  sounds poetical. }
+\paragraph{}{The primary way of having a `poetic' sounding translation
+  is through corpus choices. Google Translate's language and alignment
+  models for English $\leftrightarrow$ German translation are
+  primarily trained on the Europarl corpus, which is a transcription
+  of all European Parliament proceedings, and is available in all the
+  official languages of the Parliament \cite{parl}. Multilingual
+  corpus availability is a large problem in machine translation, and
+  the Europarl corpus is large enough that it can be used as a basis
+  for alignment models when translating the applicable European
+  languages. However, alignment models, like language models, are
+  sensitive to the input corpus (even with smoothing), and will prefer
+  alignments with words which occur often in the corpus. Europarl
+  proceedings are, predictably, very dry and not at all poetic. A
+  non-poetic input implies a non-poetic output. The obvious solution
+  here is to use a parallel corpus of German poems and their English
+  translations. Unfortunately, no such corpuses exist, and creation is
+  extremely difficult, as very few parallel poetic translations are
+  available in easily-processable digital form. In an ideal world, to
+  translate a given poet's poem, we'd use a corpus of parallel
+  translated poems from the same time period or style. Unfortunately,
+  this is not the ideal world, so some compromise is needed. }
+\paragraph{}{Using a poetic language model is a much more reasonable
+  and achievable solution. A suitable language model can be built, I
+  believe, simply by collecting a large amount of poetry in the target
+  language --- in this case, English, and using this to train the
+  language model. As part of this project, I scraped the top 500
+  English language works from Project Gutenberg tagged under `poetry'
+  and collated them into a corpus, which could possibly be used to
+  train a language model with a toolkit that allows it. However, this
+  method does raise some problems.}
+\paragraph{}{Kao (2011) \cite{kao} showed that there are certain
+  characteristics which occur specifically in professionally-written
+  poems. The primary features, for modern poetry, are firstly the
+  reduced presence of rhyme and alliteration, secondly the use of
+  concrete nouns, and thirdly the use of less common
+  words. Preservation of these features is well-paired with
+  phrase-based machine translation. The lack of rhyme and alliteration
+  means we do not need to find ways to parse for them, which is a
+  difficult task due to variations in pronunciation. The increased use
+  of concrete nouns can be applied by adding an extra weighing to
+  these tokens while training our language model. The use of less
+  common words is more difficult, as language models, by design, favor
+  more common words. A possible solution would be performing extra
+  smoothing on the corpus which, for example, greatly increases the
+  probability of less common words and decreases the probability of
+  more common words. The problem with this, of course, is that less
+  common words will begin to be used where a poet may not necessarily
+  use them: for example, substituting `to have' with `to possess' or
+  `to retain'. }
+
+\paragraph{Alignment model}{Whereas sentences in prose are clearly
+  defined, poetry does not have strong sentence distinctions. In some
+  cases, a line break may indicate the end of a sentence: in others, a
+  line break may indicate the end of a clause, or even just
+  nothing. Compare the following extracts of poems:\\}
+
+
+\begin{minipage}{\linewidth}
+  \begin{verse}
+    one's not half two. It's two are halves of one: \\
+    which halves reintegrating,shall occur \\
+    no death and any quantity;but than \\
+    all numerable mosts the actual more
+    \attrib{ee cummings\cite{cummings}}
+  \end{verse}
+\end{minipage}
+
+\begin{minipage}{\linewidth}
+  \begin{verse}
+    Sunlight pouring across your skin, your shadow \\
+    >[0.55\linewidth] flat on the wall. \\
+    The dawn was breaking the bones of your heart like twigs. \\
+    You had not expected this, \\
+    >[0.1\linewidth] the bedroom gone white, the astronomical light \\
+    >[0.4\linewidth] pummeling you in a stream of fists.
+    \attrib{Richard Siken \cite{siken}}
+  \end{verse}
+\end{minipage}
+
+\paragraph{}{In the first poem, line breaks have no meaning: aside
+  from adding a small pause when the poem is read out loud, they can
+  completely be disregarded. There are no traditional sentence
+  boundaries.  This is an issue with phrase-based translation, as it
+  relies on the existence of aligned sentences, and to have aligned
+  sentences, one needs clearly defined sentence boundaries. An option
+  for this would be to define sentence boundaries as new lines, rather
+  than standard punctuation (. !  ?). However, in this case, it would
+  lead to important phrases, such as `than all' being split. In
+  theory, this shouldn't be an issue --- as already mentioned,
+  phrase-based translation actually performs better when
+  non-syntactically correct phrase alignments are allowed --- however,
+  with translation of meaning in poetry being so context-dependent
+  (see the Google Translate example), it could be severely detrimental
+  to translation quality. }
+\paragraph{}{The second poem is one in which using line-endings for
+  separating sentence units would not work: in this case, parsing for
+  traditional sentence endings will, in fact, work, because the line
+  breaks have only been introduced due to the stylistic preferences of
+  the author. The most striking part of this poem is actually the
+  layout on the page, which I have tried my best to reproduce from the
+  original. A translation would need to reproduce this indentation as
+  well, but this could be done quite easily by parsing for whitespace
+  at the start of a line in the original poem and using the same
+  amount of whitespace in the translation.\footnote{This would only
+    work for systems where features like whitespace are not stripped
+    before being input.}}
+\paragraph{}{A possible solution to the sentence alignment issue would
+  be to split poems into two types:}
+\begin{enumerate}
+\item Poems whose sentences can be treated in the same way as prose,
+  where sentences can be assumed to be marked by standard sentence
+  boundaries.
+\item Poems whose sentence boundaries are marked by line-endings,
+  rather than punctuation.
+\end{enumerate}
+\paragraph{}{The first feature is already used in common sentence
+  alignment tools: the second feature could be implemented relatively
+  easily by tagging new sentences on line breaks. }
+
+\paragraph{Preserving poetic qualities}{Now that we have dealt with
+  the first two problems, we now face the third: how do we preserve
+  poetic characteristics while translating? State-of-the-art systems,
+  as mentioned already, do not put any weight on preserving aspects of
+  poetry such as rhythm or rhyme. There are two possible ways: either
+  hypothesis constraints, or post-processing.}
+\paragraph{}{Genzel, Uszkoreit, and Och (2010) \cite{genzel} use
+  hypothesis constraints to preserve poetic features such as meter,
+  line length (syllable and word), or rhyme. By treating poetic
+  features as constraints on the poem --- for example, a haiku has a
+  constraint on line length and syllable count --- they implement a
+  generic poetic form feature function for phrase-based statistical
+  machine translation systems. This is a feasible solution to the
+  problem of preserving certain poetic features. However, there is an
+  issue in the output: while it preserves poetic features, it does not
+  preserve fluency, which is of high concern when it comes to
+  translating poetry. Here is an example from the paper of a baseline
+  translation, and a `couplet in amphibrachic tetrameter' (stressed
+  syllables italicized): \\}
+\begin{displayquote}
+  A policeman said that three people were arrested and that the
+  material is currently being analyzed. 
+\end{displayquote}
+\begin{displayquote}
+  An {\it of}ficer {\it sta}ted that {\it three} were ar{\it re}sted \\
+  and {\it that} the e{\it quip}ment is {\it cur}rently {\it test}ed.
+\end{displayquote}
+
+\paragraph{}{Another solution, instead of searching inside the
+  hypothesis space, would be to use post-processing. In many uses of
+  machine translation, the output already undergoes post-processing by
+  experienced translators or native speakers to fine-tune the output.
+  We could, in much the same way, recover poetic features which were
+  `lost in translation' by computational post-processing. For example,
+  if we wanted to preserve the rhyme scheme of the original poem, it
+  could be enough to look for the rhyming synonyms of words at the end
+  of lines, and replace those words with their synonyms until the
+  lines rhyme in the same way as the original. This is a very
+  na{\"i}ve approach, but I believe it could work, given a good enough
+  synonym dictionary. There could also be a distortion model, in much
+  the same way as phrase-based translation systems, to allow for word
+  reordering. This could essentially be seen as implementing a second
+  machine translation system, but instead of translating from a
+  foreign language to English, we translate from non-poetic to poetic
+  English. }
+
+\paragraph{}{What I have assumed while discussing the two previous
+  methods is that we already know what poetic features a poem
+  has. While it is relatively easy for a trained human to identify and
+  annotate such features, it is a non-trivial task for computers to do
+  perfectly. Let us briefly consider the two main qualities we want to
+  preserve: rhythm and rhyme. }
+\paragraph{}{Byrd and Chodorow (1985) \cite{byrd} present a method for
+  finding the stress patterns and rhyme-endings of unknown words from
+  a pre-existing dictionary. For a given word, three things are looked
+  at: the words surrounding it alphabetically, the words which are
+  likely to rhyme with it, and words with similar word-end
+  spelling. This method, however, relies on a good-quality, up-to-date
+  dictionary for the target and source languages. For less common
+  languages, such a dictionary is very unlikely to
+  exist. Additionally, slant rhymes and changes in pronunciation mean
+  that whether two words rhyme is not necessarily a yes-or-no
+  question.}
+\paragraph{}{Reddy and Knight (2014) \cite{reddy} continue the work of
+  Greene et al. (2010) \cite{greene} to describe a method of
+  unsupervised discovery of rhyme schemes which is very
+  promising. Machine learning methods are used to infer the presence
+  of rhyme schemes from corpuses of poetry. The major benefit of this
+  is that it is language-independent: so long as one has some sort of
+  corpus of rhyming poetry in a given language, it is feasible that
+  some rhyme schemes are able to be automatically learned by the
+  algorithm.}
+\paragraph{}{Luckily, the problem of identifying word stress is more
+  easily solved. Due to advances in the field of speech
+  synthesis\cite{williams, liber}, as well as previous research into
+  stress-timing and syllable-timing \cite{dauer}, finding word stress
+  is relatively trivial. }
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Report"
+%%% End:

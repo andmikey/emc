@@ -1,0 +1,72 @@
+\paragraph{Language model}{With a language model, we can assign a
+  probability to a sequence of words. Intuitively, the sentence `the
+  house is small' \cite{smt} should be more likely than `small the is
+  house'.\footnote{However, to quote Chomsky: ``It must be recognized
+    that the notion `probability of a sentence' is an entirely useless
+    one''. The probability of a sentence has no intrinsic linguistic
+    meaning, because humans do not produce language on a statistical
+    basis.} We can use a statistical language model to accurately
+  describe just how much more likely it is. To build our language
+  model, we take a single-language corpus and use $n$-grams by way of
+  the Markov assumption\cite{markov}, in a similar way to Weaver's
+  original suggestions.}
+\paragraph{}{Let's say that we want to estimate the probability of a
+   sequence of words, $W = w_1, w_2, \dots w_n$. The na{\"i}ve
+   approach to this would be to take a sufficiently large corpus,
+   count how many times $W$ appears in it, and divide by the total
+   number of $n$-word sequences to get a probability for $W$: however,
+   even for an extremely large corpus, it is very unlikely that $W$
+   will have appeared at all in its exact form, making probability
+   distributions extremely sparse. What we can do instead is use the
+   chain rule to decompose the probability of $W$\cite{smt}:
+   $$ \Pr(w_1, w_2, \dots w_n) = \Pr(w_n | w_1 \dots w_{n-1})$$ This
+   is still cumbersome to calculate, so we can restrict our
+   calculations to only a history of words, that is
+   $$ \Pr(w_n | w_1 \dots w_{n-1}) \approx \Pr(w_n|w_{n-m} \dots
+   w_{n-1})$$ We use the Markov assumption here by saying that only a
+   limited number of previous words affect the probability of the
+   $n$th word.\footnote{While this assumption is technically wrong,
+     it is a convenient simplification, because shorter word histories
+     have less sparse probability distributions.} Most commonly,
+   language models will restrict their search space to the previous
+   two words (called {\it trigrams}, because they consider sets of
+   three words) or just the previous word (correspondingly called {\it
+     bigrams}). Expanding the search space for larger values of $n$ is
+   usually a matter of diminishing returns. }
+ \paragraph{}{If we therefore wanted to estimate the probability of a
+   given trigram consisting of the sequence $T = w_1, w_2, w_3$, we would 
+   count the amount of times we see the sequence $w_1, w_2, w_3$ in
+   the corpus, and divide it by the amount of times we see just the
+   sequence $w_1, w_2, x$ for all words $x$: that is, we divide the
+   count of that specific trigram by the count of all trigrams which
+   start with its history. Then by maximum likelihood estimation
+   \cite{smt}, the probability of $T$ is therefore:
+   $$ \Pr(T) = \frac{\text{count}(w_1, w_2, w_3)}
+   {\sum_x \text{count} (w_1, w_2, x)}$$ \\The formula for a general
+   $x$ is defined similarly. We can calculate this for all occurring
+   $n$-grams in a corpus to give us an $n$-gram probability
+   distribution for that corpus. }
+ \paragraph{}{It is worth noting at this point that these resulting
+   probabilities are not (and should not be!) used as they are:
+   $n$-gram models are very sensitive to the training corpus
+   \cite{jur}, and as such we have two issues: sparse data
+   (probabilities for most $n$-grams will generally be quite low, by
+   Zipf's law \cite{zipf}, and will be zero for $n$-grams not seen in
+   the training corpus), and how to deal with out-of-vocabulary (OOV)
+   tokens (any $n$-gram containing a word not seen in the training
+   corpus will have a probability of 0). To deal with OOV tokens, we
+   can either simply insert an `unknown' token (usually `UNK') into
+   the training data, or we can replace the first occurrence of each
+   vocabulary word with `UNK', and then calculate its probability
+   distribution in the same manner as any other word. The best method
+   of dealing with the sparse data issue is by using smoothing
+   methods: these allow us to get better estimates for $n$-grams which
+   occurred rarely in the training data, or not at all. There are
+   numerous methods, which I will not go into here, including
+   Kneser-Ney Smoothing and Good-Turing estimation. Backoff and
+   interpolation methods may also be used\cite{jur}. }
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Report"
+%%% End:

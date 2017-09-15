@@ -1,0 +1,58 @@
+\paragraph{A cognitive model of language}{Before we can begin to
+  discuss computational approaches to language modeling, it is best
+  that we take a moment to discuss cognitive models of language:
+  essentially, a way of trying to approximate and describe human
+  cognitive (thinking) processes. For all that humans are very good at
+  learning and speaking languages --- both as children and adults ---
+  we really have no idea {\it why} we're so good at it. As early as
+  Roger Bacon's 1245 work `Overview of Grammar' \cite{bacon},
+  linguists (or philosophers and grammarians, as they were called in
+  those days) have suggested that all languages are built upon a
+  common cognitive grammar: that is, human languages are an innate
+  experience. Noam Chomsky formalized the idea of a `universal
+  grammar' in 1965: \cite{ug} the idea that there is an innate
+  language faculty in humans that `knows' the rules that allow for
+  language to be developed and used, for example distinguishing nouns
+  from verbs. But exactly what this universal grammar is, is not a
+  question which has been answered yet.}
+\paragraph{}{At multiple points throughout the history of NLP,
+  researchers have tried to computationally emulate this internal
+  grammar structure, especially within the context of machine
+  translation. It stood to reason that if we could build a
+  computational grammar good enough, machine translation would become
+  easy --- in a similar way to how Weaver suggested we use the
+  ``universal language''. The simplest of these attempts were
+  rule-based machine translation systems (RBMT), which came in three
+  groups: \cite{jur}}
+\begin{enumerate}
+\item Direct systems, or dictionary-based machine translation, which
+  consisted purely of dictionary lookups.
+\item Transfer systems, which broke translation up into three steps:
+  \begin{enumerate}
+  \item Analysis of the source language input to find its grammatical
+    structure by, for example, morphological analysis (classifying
+    each word as eg. noun, verb, as well as gender, tense, etc), or
+    word-sense disambiguation;
+  \item Transfer of the resulting structure into a structure useful
+    for the target language; and
+  \item Generation of text in the target language from the final
+    structure.
+  \end{enumerate}
+\item Interlingua systems, which converted source input to an
+  intermediate language-independent representation, then converted
+  that to the target language.
+\end{enumerate}
+
+\paragraph{}{For all that these approaches became very popular in the
+  MT community, they did have some major problems. Rule-based systems
+  work reasonably well for closed domains (where you know roughly what
+  format your input and output must take, like in the case of METEO),
+  but when it comes to open systems (where the input and output could
+  be anything), the amount of work needed to maintain complex rules,
+  including accounting for ambiguity and idiomatic expressions,
+  quickly becomes insurmountable.}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Report"
+%%% End:

@@ -1,0 +1,128 @@
+\documentclass[a4,oneside,12pt,onecolumn]{extarticle}
+\usepackage{style}
+\usepackage{pdfpages}
+
+\begin{document}
+% Import title page
+\includepdf[pages={-}]{Title.pdf}
+% Above increments page counter by one, so decrement it back 
+\setcounter{page}{1}
+
+\begin{abstract}
+  \centering\begin{minipage}{0.5\textwidth} As a prerequisite to
+    automated machine translation of poetry, I present possible
+    methods of improving current word- and phrase-based statistical
+    methods to make them more suitable for poetic and literary works.
+  \end{minipage}
+\end{abstract}
+
+\newpage
+\input{Introduction}
+\input{Background}
+\input{Theory}
+\input{Discussion}
+\input{Conclusion}
+
+
+\begin{thebibliography}{10}
+  %% INTRODUCTION
+\bibitem{wangwei} E. Weinberger \& O. Paz. {\it Nineteen Ways of Looking
+    at Wang Wei}. 1987.
+\bibitem{eugin} E. Nida. {\it Principles of Correspondence} in {\it
+    Translation Studies Reader}. 2007.
+  
+  %% BACKGROUND
+\bibitem{acl-def} {\it What is Computational Linguistics?}
+  \url{http://www.aclweb.org/archive/misc/what.html}
+\bibitem{weaver} W. Weaver. {\it
+    Translation}. \url{http://www.mt-archive.info/Weaver-1949.pdf}
+\bibitem{core} J. Hutchins. {\it Milestones in Machine Translation no.2}
+  \url{http://www.hutchinsweb.me.uk/Milestones-2.pdf}. 1998.
+\bibitem{pitts} W. S. McCulloch \& W. Pitts. {\it A Logical Calculus of the Ideas Immanent in Nervous Activity} in {\it Bulletin of Mathematical
+  Biophysics}. 1943. 
+\bibitem{retro} J. Hutchins. {\it Retrospect and prospect in
+    computer-based translation}. 1999.
+\bibitem{georgetown} L. E. Dostert. {\it The Georgetown-IBM
+    experiment}. 1955.
+\bibitem{alpac} {\it Language and Machines: Computers in Translation
+    and Linguistics}
+  \url{http://www.mt-archive.info/ALPAC-1966.pdf}. 1966.
+\bibitem{alpac-crit} J. Hutchins. {\it ALPAC - the (in)famous report}
+  \url{http://www.hutchinsweb.me.uk/MTNI-14-1996.pdf}. 1996.
+\bibitem{shrdlu} T. Winograd. {\it Procedures as a Representation for
+    Data in a Computer Program for Understanding Natural Language} in
+  {\it MIT AI Technical Report 235}. 1971.
+\bibitem{shift} L. Liddy et al. {\it Natural Language
+    Processing}. \url{http://www-nlpir.nist.gov/MINDS/FINAL/NLP.web.pdf}
+\bibitem{ibm} P. F. Brown et al. {\it A Statistical Approach to
+    Machine Translation}. Computational Linguistics. 1990.
+\bibitem{gnmt} Y. Wu et al. {\it Google's Neural Machine Translation
+    System: Bridging the Gap between Human and Machine
+    Translation}. 2016.
+\bibitem{ng} P. I. Nakov \& H. T. Ng. {\it Improving Statistical
+    Machine Translation for a Resource-Poor Language Using Related
+    Resource-Rich Languages}. 2014.
+\bibitem{avr} E. Avramidis \& P. Koehn. {\it Enriching Morphologically
+    Poor Languages for Statistical Machine Translation}. 2008.
+\bibitem{fam} J. Dryden. {\it The Three Types of Translation} in {\it
+    The Translation Studies Reader}. 2007. p. 53--54
+\bibitem{hist} C. Rumens. {\it Translating poetry opens up new worlds
+    of language}.
+  \url{https://www.theguardian.com/books/booksblog/2007/sep/28/translatingpoetryopensupne}
+
+  %% THEORY
+\bibitem{bacon} R. Bacon. {\it Summa Grammatica (Overview of Grammar)}. 1245.
+\bibitem{ug} N. Chomsky. {\it Aspects of the Theory of Syntax}. 1965.
+\bibitem{jur} D. Jurafsky \& J. H. Martin. {\it Speech and Language
+    Processing}. 2009.
+\bibitem{smt} P. Koehn. {\it Statistical Machine Translation}. 2010.
+\bibitem{bayes} T. Bayes \& R. Price. {\it An Essay towards solving a
+    Problem in the Doctrine of Chance}. 1763. Also independently
+  discovered by P. S. Laplace. {\it M{\'e}moire sur la probabilit{\'e}
+    des causes par les {\'e}v{\'e}nements}. 1774.
+\bibitem{markov} A. A. Markov. {\it Theory of Algorithms}. 1954.
+\bibitem{gale} W. A. Gale \& K. W. Church. {\it A Program for Aligning
+    Sentences in Bilingual Corpora}. 1993.
+\bibitem{m1} Brown et al. {\it The Mathematics of Statistical Machine
+    Translation}. 1993.
+\bibitem{koehn} P. Koehn et al. {\it Statistical Phrase-Based
+    Translation}. 2002.
+\bibitem{zipf} G. K. Zipf. {\it The psycho-biology of language}. 1935.
+\bibitem{wong} D. Marcu \& W. Wong. {\it A phrase-based \& joint probability model for statistical machine translation}. 2002. 
+  %% DISCUSSION
+\bibitem{nabokov} V. Nabokov. {\it Eugene Onegin: A Novel in Verse by
+    Aleksandr Pushkin. Translated from the Russian}. 1964.
+\bibitem{nabokovtheory}  {\it The Theory and Practice of Poetic Translation in Pushkin and Nabokov}
+\bibitem{goethe} Alan P. Cottrell. {\it Goethe's view of evil and the
+    search for a new image of man in our time}. 1982.
+\bibitem{beo} Technische Universit{\"a}t Chemnitz. {\it
+    Beolingus}. \url{http://dict.tu-chemnitz.de/}
+\bibitem{hof} D. Hofstadter. {\it Le Ton Beau de Marot: In Praise of
+    the Beauty of Language}. 1997.
+\bibitem{parl} P. Koehn. {\it Europarl: A Parallel Corpus for
+    Statistical Machine Translation}. 2005.
+\bibitem{kao} J. Kao. {\it A Computational Analysis of Poetic Craft in
+    Contemporary Professional and Amateur Poetry}. 2011.
+\bibitem{cummings} ee cummings. {\it Selected Poems}. 2007.
+\bibitem{siken} R. Siken. {\it Visible World} in {\it Crush}. 2005.
+\bibitem{genzel} D. Genzel \& J. Uszkoreit \& F. Och. {\it ``Poetic''
+    Statistical Machine Translation: Rhyme and Meter}. 2010.
+\bibitem{byrd} R. J. Byrd \& M. S. Chodorow. {\it Using an on-line
+    dictionary to find rhyming words and pronunciations for unknown
+    words}. 1985.
+\bibitem{reddy} S. Reddy \& K. Knight. {\it Unsupervised Discovery of
+    Rhyme Schemes}. 2014.
+\bibitem{greene} E. Greene et al. {\it Automatic analysis of rhythmic
+    poetry with applications to generation and translation}. 2010.
+\bibitem{williams} B. Williams. {\it Word stress assignment in a
+    text-to-speech synthesis system for British English}. 1987.
+\bibitem{liber} M. Y. Liberman \& K. W. Church. {\it Text Analysis and
+    Word Pronunciation in Text-to-speech Synthesis}. 1991.
+\bibitem{dauer} R. M. Dauer. {\it Stress-timing and syllable-timing
+    reanalyzed}. 1983.
+  %% CONCLUSION
+\bibitem{moses} P. Koehn et al. {\it Moses: Open Source Toolkit for
+    Statistical Machine Translation}. 2007.
+  
+\end{thebibliography} 
+\end{document}

@@ -1,0 +1,131 @@
+
+ \paragraph{Alignment model}{How we approach our alignment model
+   depends on if we are using {\it word-based} or {\it phrase-based}
+   machine translation.\cite{smt}}
+ \paragraph{Word-based}{While word-based models are no longer
+   state-of-the-art, the methods which are used for them remain
+   relatively applicable to modern MT problems, as well as being
+   interesting in their own right. The following section will be based
+   on the IBM models of machine translation first presented in 1990
+   \cite{ibm}, which are still used to an extent in the GIZA and
+   GIZA\texttt{+}\texttt{+} toolkits for alignment. Word-based models,
+   are, predictably, based on translating words in isolation, or {\it
+     lexical translation}. Firstly, we take a corpus of texts in a
+   foreign language, and their translations into English, and then
+   calculate statistics (a lexical translation probability
+   distribution) from these.}
+ \paragraph{}{Formally speaking, we want to calculate the probability
+   that a given foreign word $f$ translates into a given English word
+   $e$, given the data in our corpus. The most straightforward way of
+   doing this is, again, maximum likelihood estimation: we take the
+   count of the amount of times we see $f$ translated to $e$, and
+   divide it by the amount of times we see $f$ overall in the
+   corpus. Smoothing can again be used here to account for data
+   sparsity and OOV tokens.}
+ \paragraph{}{Given this probability distribution, we can now get to
+   the task of building our alignment model. A foreign sentence $F$
+   can be translated to an English sentence $E$ by use of an
+   alignment: a mapping of foreign words to English words. We
+   can map this using an alignment function, which may allow for
+   adding, removing, and duplicating words: in this case, each English
+   word must be linked to exactly one input word, which may be a
+   special NULL token. On the other hand, one input word may be linked
+   to multiple output words, or none at all. \cite{smt}}
+ \paragraph{}{The IBM Model 1 is a generative model (meaning it breaks
+   the problem up into smaller steps, and then generates a final
+   answer using these intermediate steps), and is based only on the
+   aforementioned lexical translation probability distribution. It is
+   described in quite some detail in Brown et al. (1993) \cite{m1}, so
+   I will only give a superficial gloss. In short, the IBM Model 1
+   defines the probability of translating a foreign sentence
+   $f = f_1, f_2 \dots f_n$ of length $l_f$ into an English sentence
+   $e = e_1, e_2 \dots e_n$ of length $l_e$, with an alignment of each
+   English word $e_j$ to a foreign word $f_i$ according to the
+   alignment function $a(j) = i$. The formula to calculate this probability is:
+   $$ \Pr(e, a|f) =
+   \frac{\epsilon}{(l_f + 1)^{l_e}} \prod_{j=1}^{l_e}t(e_j|f_{a(j)})$$
+   where the leading fraction is used to normalize the distribution so
+   all probabilities are between 0 and 1, and $t(e_j|f_{a(j)})$ is the
+   probability of a given English word being translated into its
+   aligned foreign word, from our earlier lexical translation
+   probabilities. }
+ \paragraph{}{Higher IBM Models increase in complexity and improve
+   upon the first model's flaws; in short, they are \cite{smt}:}
+ \begin{itemize}
+ \item Model 1: lexical translation, as discussed above.
+ \item Model 2: adds an explicit alignment model, which allows for a
+   more statistically likely alignment.
+ \item Model 3: adds a fertility model, which estimates the amount of
+   output words that a foreign word `produces', allowing for input
+   words to be dropped (eg. flavoring particles), and a distortion
+   probability, which allows for more reordering in
+   translation.\footnote{In practice, the Model 3 is sufficient for
+     modern uses: using any models after this is superfluous.}
+ \item Model 4: adds a relative alignment model, which fixes issues
+   with Model 3's distortion model by looking at relative distortions
+   instead.
+ \item Model 5: fixes issues with previous models where multiple
+   output words could be placed in the same positions, which wasted
+   probability mass.
+ \end{itemize}
+
+
+ \paragraph{Phrase-based}{Phrase-based models are widely considered as
+   state-of-the-art today \cite{smt} and outperform word-based models
+   by a large margin \cite{koehn}. As the name suggests, they are
+   based on phrases (short sequences of words), and processing is done
+   on these phrases. The motivation behind this is clear to speakers
+   of foreign languages: in many cases, a word in one language cannot
+   be easily translated to another language because it has
+   phrase-specific meanings. Phrase-based translation segments an
+   input sentence into phrases, translates those phrases, and reorders
+   them as needed. This has multiple advantages compared to the
+   word-based model: it allows for one-to-many and many-to-one
+   mappings, resolves translation ambiguities, and is conceptually
+   much simpler. \cite{smt}}
+ \paragraph{}{We start with exactly the same base equation as for word
+   based models: that is, we look to maximize
+   $$ \Pr(e|f) = \Pr(f|e)\Pr(e)$$ However, for the phrase-based model,
+   we further decompose $\Pr(f|e)$ into phrase translations\cite{smt}:
+   $$ \Pr(\bar{f}_1^I | \bar{e}_1^I)  =
+   \prod_{i=1}^j \phi(\bar{f}_i | \bar{e}_i) \ d(\text{start}_i -
+   \text{end}_{i-1} - 1)$$ We break up each foreign sentence $f$ into
+   some $I$ phrases $\bar{f}_i$, and the same for each English
+   sentence; each segmentation of phrases is equally likely. $\phi$ is
+   a mapping of the probability of each English phrase being
+   translated into a foreign sentence. The distance model $d$ is used
+   to reorder the phrases.}
+ \paragraph{}{Splitting a sentence into phrases can be done using a
+   word alignment, like those seen in the earlier word-based
+   translation section. We collect all aligned phrase pairs that are
+   consistent with the word alignment. A phrase pair ($\bar{f}$,
+   $\bar{e}$) is {\it consistent} with an alignment $A$ if all words
+   in $\bar{f}$ with alignment points in $A$ have corresponding
+   alignment points with words in $\bar{e}$, and vice versa: as a
+   result, the words in a consistent phrase pair are only aligned with
+   each other, and not to words outside that phrase
+   pair.\footnote{This can leave us with phrases which are
+     non-intuitive, for example `house the`: interestingly, pruning
+     out these non-intuitive, syntactically incorrect pairs actually
+     can decrease the performance of a model.\cite{koehn}} We can then
+   estimate the phrase translation probability distribution in much
+   the same way as we estimate $n$-gram probabilities, as
+   $$ \phi(\bar{f} | \bar{e}) =
+   \frac{\text{count}(f, \bar{e})}
+   {\sum_{\bar{f}}\text{count}(\bar{f}, \bar{e})}$$ }
+ \paragraph{}{The reordering of our English phrases, relative to the
+   input foreign phrases, is done by the relative distortion
+   probability function $d(s_i - e_{i -1})$, where $s_i$ is the start
+   position, in terms of words, of the foreign phrase which was
+   translated to the $i$th English phrase, and $e_{i-1}$ is the end
+   position of the foreign phrase translated to the ($i-1$)th English
+   phrase. For simplicity, $d$ is modeled by an exponentially decaying
+   cost function, $d(x) \approx \alpha^{|x|}$, for some value of
+   $\alpha$, $ 0 \leq \alpha \leq 1$, so larger distortions are much
+   less probable, although some work has been done on modeling
+   distortion using joint probability distributions \cite{wong}.}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Report"
+%%% End:

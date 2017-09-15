@@ -1,0 +1,49 @@
+\documentclass[a1, plainboxedsections, 13pt]{sciposter}
+\usepackage[superscript]{cite}
+\usepackage{multicol}
+\usepackage{blindtext}
+\usepackage{csquotes}
+\usepackage{amsmath}
+\renewcommand{\familydefault}{\rmdefault}
+
+% \linespread{1.2}
+
+\begin{document}
+\title{{\Huge Towards Automated Translation of Poetry}}
+\author{{\Large Michael A.}}
+\maketitle
+\conference{Exeter Mathematics Certificate 2017, Year 13 Project}
+
+\begin{multicols}{3}
+  \section*{Introduction}
+  \input{Introduction}
+  \section*{Literary theories}
+  \input{Literary}
+  \section*{Hypotheses}
+  \input{Hypotheses}
+  \section*{Statistical methods}
+  \input{Statistical}
+  \section*{Alignment model}
+  \input{Alignment}
+  \vfill\null\columnbreak       
+  \section*{Language model}
+  \input{Language}
+  \section*{Preserving poetic qualities}
+  \input{Processing}
+  \section*{Conclusion}
+  \input{Conclusion}
+  \begin{thebibliography}{10}
+  \bibitem{nabokov} V. Nabokov. {\it Eugene Onegin: A Novel in Verse by
+      Aleksandr Pushkin. Translated from the Russian}. 1964.
+  \bibitem{chomsky} N. Chomsky. {\it Aspects of the Theory of
+      Syntax}. 1965.
+  \bibitem{bayes} T. Bayes \& R. Price. {\it An Essay towards solving a
+      Problem in the Doctrine of Chance}. 1763.
+  \bibitem{smt} P. Koehn. {\it Statistical Machine
+      Translation}. 2010.
+  \bibitem{genzel} D. Genzel \& J. Uszkoreit \& F. Och. {\it ``Poetic''
+      Statistical Machine Translation: Rhyme and Meter}. 2010.
+  \end{thebibliography}
+\end{multicols}
+
+\end{document}

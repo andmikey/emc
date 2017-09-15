@@ -1,0 +1,20 @@
+\paragraph{}{It is hypothesized that humans have an internal grammar
+  model, or a `universal grammar' \cite{chomsky}, which allows them to
+  learn language in a way that other animals cannot. But exactly what
+  this grammar is eludes researchers: so, try as we might, we cannot
+  computationally emulate it. Instead, we can approximate human use of
+  language using statistical methods.}
+\paragraph{}{Say we want to translate a foreign sentence $f$ into an
+  English sentence $e$. Then by a probabilistic model, we want to
+  maximise the probability that a given English sentence is the
+  correct translation of the foreign sentence: that is, maximise
+  $\Pr(e|f)$.\cite{smt} Modelling this probability distribution is
+  difficult, so we simplify the problem by applying Bayes' theorem:
+  \cite{bayes}
+  $$ \Pr(e|f)= \Pr(e)\Pr(f|e)$$ This gives us two variables to
+  maximize: $\Pr(e)$, the {\it language model}, and $\Pr(f|e)$, the
+  {\it alignment model}.}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Poster"
+%%% End:

@@ -1,0 +1,100 @@
+\paragraph{Corpuses}{But before we can start, we need to acquire a
+  corpus. A corpus, roughly speaking, is just a collection of text in
+  our target language. It can come from any source, and indeed corpora
+  used in linguistics vary widely: examples include the British
+  National Corpus (consisting of 100 million words, covering British
+  English in the late 20th century), Brown Corpus (1 million words,
+  and tagged for parts-of-speech), and Google Books N-Gram corpus
+  (multilingual, and searchable online).}
+\paragraph{}{Within machine translation, we need two types of corpus:
+  a monolingual (language model) corpus, and a parallel bilingual
+  corpus. When looking for a corpus to use, the most important thing
+  to consider is the domain and topic of the text. For machine
+  translation, the domain and topic of the corpus should, as closely
+  as possible, match the domain and topic of the text to be
+  translated. So, for example, if we were to be translating scientific
+  documents, then the best choice for a corpus to learn from would be
+  a corpus of other scientific documents.  In an ideal world, to
+  translate a given poem, we'd have: a monolingual corpus, entirely
+  consisting of poems in the target language in the same style as our
+  poem to translate; and a bilingual corpus of poems in the source
+  language, of the same style as our input poem, translated by
+  professionals into the target language. However, that does throw up
+  some problems, which will be discussed later. }
+
+\paragraph{Sentence alignment}{Once we have acquired a parallel corpus
+  to work with, we still need to perform sentence alignment. When a
+  human translator translates some text, they do not necessarily
+  translate it word-for-word or sentence by sentence: this is
+  especially true for languages where the writing system does not
+  distinguish sentence boundaries. By aligning sentences within a
+  corpus, we can more easily find word and phrase pairs when building
+  our alignment model.}
+
+\paragraph{}{Formally, \cite{smt} given a set of sentences in a
+  foreign language $f = f_1, f_2 \dots f_{n_{f}}$ and their
+  translations into English $e = e_1, e_2 \dots e_{n_{e}}$, we want to
+  find a sentence alignment $S = \{ s_1, s_2 \dots s_n\}$ such that
+  all sentences in both the source and target language are present
+  within the alignment, and each sentence only occurs in one sentence
+  pair. The simplest way to do this is with the Gale-Church sentence
+  alignment algorithm. \cite{gale} The intuition behind their
+  algorithm is that longer sentences in one language tend to be
+  translated to longer sentences in the other language, and
+  vice versa. A probabilistic score is assigned to sentence pairs
+  based on both the ratio of character lengths in the sentences, and
+  the variance of this ratio. Then a dynamic programming framework is
+  used to find the most likely sentence alignment.}
+\paragraph{}{Two steps are required for this algorithm: first,
+  paragraphs of parallel text are aligned, then sentences within each
+  paragraph are aligned. Paragraph alignment is reasonably easy, as
+  paragraphs are almost always already aligned in translated text, and
+  tend to be very clearly marked out. This means that they can be
+  aligned automatically, with the output being corrected by hand if
+  needed.}
+
+\paragraph{}{First we define a distance function $d$ which allows for
+  sentence insertion, deletion, and substitution, which takes four
+  arguments, $x_1, y_1, x_2, y_2$. We let:\cite{gale}}
+\begin{enumerate}
+\item $d(x_1, y_1, 0, 0)$ be the cost of substituting $x_1$ with
+  $y_1$,
+\item $d(x_1, 0, 0, 0)$ be the cost of deleting $x_1$,
+\item $d(0, y_1, 0, 0)$ be the cost of inserting $y_1$,
+\item $d(x_1, y_1, x_2, 0)$ be the cost of combining $x_1$ and $x_2$
+  to make $y_2$,
+\item $d(x_1, y_1, 0, y_2)$ be the cost of expanding $x_1$ to $y_1$
+  and $y_2$
+\item $d(x_1, y_1, x_2, y_2)$ be the cost of merging $x_1$ and $x_2$
+  and matching with $y_1$ and $y_2$
+\end{enumerate}
+
+\paragraph{}{Then we can use a dynamic programming algorithm to align
+  the sentences, defined as follows:\cite{gale}}
+\begin{displayquote}
+  Let $s_i$, $i=1 \dots I$, be the sentences of one language, and
+  $t_j$, $j=1 \dots J$ be the translations of those sentences in the
+  other language. Let $d$ be the distance function defined previously,
+  and let $D(i, j)$ be the minimum distance between sentences
+  $s_1 \dots s_i$ and their translations $t_1 \dots t_j$, under the
+  maximum likelihood alignment. $D(i, j)$ is computed by minimizing
+  over six cases (substitution, deletion, insertion, contraction,
+  expansion, and merger) which, in effect, impose a set of slope
+  constraints. That is, $D(i, j)$ is defined by the following
+  recurrence with the initial condition $D(i, j) = 0$:\\
+  $$
+  D(i, j) = \text{min}
+  \begin{cases}
+    D(i, j-1)   &+ \quad d(0,   t_j, 0,       0)       \\
+    D(i-1, j)   &+ \quad d(s_i, 0,   0,       0)       \\
+    D(i-1, j-1) &+ \quad d(s_i, t_j, 0,       0)       \\
+    D(i-1, j-2) &+ \quad d(s_i, t_j, 0,       t_{j-1}) \\
+    D(i-2, j-1) &+ \quad d(s_i, t_j, s_{i-1}, 0)       \\
+    D(i-2, j-2) &+ \quad d(s_i, t_j, s_{i-1}, t_{j-1}) \\    
+  \end{cases}
+  $$\\
+\end{displayquote}
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Report"
+%%% End:

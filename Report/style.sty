@@ -1,0 +1,35 @@
+\usepackage[superscript]{cite}
+\usepackage{footmisc}
+\usepackage{csquotes}
+\usepackage{verse}
+\usepackage{multicol}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\renewcommand{\thefootnote}{\roman{footnote}}
+
+% \quot{quote}{author}
+\newcommand{\quot}[2]{
+  \begin{minipage}{\linewidth}
+    \begin{flushright}
+      {\it ``#1'' \\ {\small #2}}
+    \end{flushright}
+    \end{minipage}
+}
+
+
+\newcommand{\attrib}[1]{%
+  \nopagebreak{
+    \begin{flushright}
+    \footnotesize
+    #1
+    \end{flushright}
+    \par
+  }}
+
+
+\linespread{1.2}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Report"
+%%% End:

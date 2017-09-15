@@ -1,0 +1,380 @@
+%\documentclass[notesonly, handout]{beamer}
+\documentclass[notes]{beamer}
+\usepackage{verse}
+\usepackage{pgfpages}
+% \pgfpagesuselayout{4 on 1}[a4paper, border shrink=5mm, landscape]
+\usetheme{Dresden}
+
+\newcommand{\quot}[2]{
+    \begin{exampleblock}{}
+      #1
+      \vskip5mm
+    \hspace*\fill{\small --- #2}
+  \end{exampleblock}
+}
+\newcommand{\attrib}[1]{%
+  \nopagebreak{
+    \begin{flushright}
+    \footnotesize
+    #1
+    \end{flushright}
+    \par
+  }}
+
+\title{Towards Automated Translation of Poetry}
+\author{Michael A.}
+\institute{Exeter Mathematics School}
+\date{March 30, 2017}
+
+\begin{document}
+\begin{frame}
+  \titlepage
+\end{frame}
+\begin{frame}
+  \tableofcontents
+\end{frame}
+\section{Introduction}
+\begin{frame}{What is this?}
+  \begin{itemize}
+  \item Translation is hard --- for humans and computers
+  \item Poetry is awesome, but difficult to move across languages
+  \item What if a computer could translate poetry for us?
+  \item EMC: hypotheses for improving existing methods
+  \item A look at literary and computational approaches to poetry
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{What is poetry?}
+  \quot{If I read a book and it makes my whole body so cold no fire
+    can warm me I know that is poetry. If I feel physically as if the
+    top of my head were taken off, I know that is poetry. These are
+    the only way I know it. Is there any other way?}{Emily Dickinson}
+
+\end{frame}
+\note{
+  \begin{itemize}
+    \item Quite a qualitative description of poetry
+    \item As an expression of feeling, emotion --- just a human thing?
+    \item How can machines translate it if it's exclusive to humans?
+    \item Does this exclude certain kinds of poetry? What about poems
+      that eg. only play with the language, as opposed to seeking to
+      be as ground-breaking as Dickinson suggests?
+  \end{itemize}
+}
+
+\begin{frame}{What is poetry?}
+  \quot{Poetry is that which is lost in translation.}{Robert Frost}
+
+\end{frame}
+\note{
+  \begin{itemize}
+    \item Different idea of poetry --- focus on aesthetic and rhythmic form
+    \item Emotional response to a poem closely linked to cultural
+      context around it --- cannot translate that. Form, on the other
+      hand...
+    \item More what most people would associate poetry with ---
+      rhythm, rhyme, alliteration, form...
+    \item EMC was looking at how we can translate these kinds of form,
+      rather than emotion
+  \end{itemize}
+}
+
+\begin{frame}{What is MT?}
+  \begin{itemize}
+  \item {\bf Machine translation} (MT) is translation using computers
+  \item Warren Weaver's theories:
+    \begin{enumerate}
+    \item Looking at $n$ surrounding words to disambiguate word meaning
+    \item ``Deducing any legitimate conclusion from a finite set of
+      premises''
+    \item Cryptographic process
+    \item Descend ``down to the common base of human communication''
+    \end{enumerate}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}{Why translate poetry?}
+  \begin{enumerate}
+  \item Translated poems contribute massively to English literature
+  \item Translating to/from languages with little or no translation
+    communities
+  \item Translated poems worth reading in their own right
+  \item Computational, quantitative treatment of poetry
+  \end{enumerate}
+\end{frame}
+
+
+\section{Literary background}
+\begin{frame}{Nabokov}
+  \quot{The hack who has never read the original, and does not know
+    its language, praises an imitation as readable because easy
+    platitudes have replaced in it the intricacies of which he is
+    unaware.}{Vladimir Nabokov}
+\end{frame}
+\begin{frame}{Nabokov's theories}
+  \begin{itemize}
+  \item {\bf Paraphrastic} A free version of the original
+  \item {\bf Lexical} Basic translation of words and their order
+  \item {\bf Literal} Preserving exact contextual meaning
+  \end{itemize}
+  \quot{To reproduce the rhymes and yet translate the entire poem is
+    computationally impossible.}{Vladimir Nabokov}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Nabokov wrote a translation of Eugene Onegin, which was
+    literal --- didn't translate rhyme scheme, but otherwise
+    completely faithful to original
+  \item However literal impossible to do computationally --- would
+    need general AI (cultural context, emotion, etc)
+  \item Lexical good for getting general idea of poem, easiest to do
+    computationally
+  \item Paraphrastic not great - doesn't preserve original poem. But
+    doable computationally
+
+  \end{itemize}
+}
+\begin{frame}{Goethe: original}
+  \begin{verse}
+
+    {\"U}ber allen Gipfeln \\
+    Ist Ruh, \\
+    In allen Wipfeln \\
+    Sp{\"u}rest du \\
+    Kaum einen Hauch; \\
+    Die V{\"o}gelein schweigen im Walde. \\
+    Warte nur, balde \\
+    Ruhest du auch.
+  \end{verse}
+  \attrib{Johann Wolfgang von Goethe}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Widely considered most beautiful poem in German language
+  \item Contrast between man --- restless, uncomfortable in the
+    silence of the forest --- while nature is united in silence
+  \item Scale of poem --- large scale (summits), middle distance
+    (treetops), immediate surroundings (forest), then finally man
+  \item Encompassing all the universe
+  \item Stylistically --- note rhyme scheme, meter
+  \end{itemize}
+}
+
+\begin{frame}{Goethe: lexical}
+  \begin{verse}
+    Over all peaks\slash summits\slash tops \\
+    Is rest\slash peace\slash silence, \\
+    In all treetops \\
+    You (informal) sense\slash feel \\
+    Hardly a breath\slash breeze; \\
+    The little birds remain silent\slash keep still in the wood\slash forest. \\
+    Just wait, soon \\
+    You rest\slash repose too\slash also. \\
+  \end{verse}
+  \attrib{TU Chemnitz Dictionary}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item I've let alternative translations be represented by slashes -
+    clearly, many options on how to translate each word
+  \item Purposely sacrificing ease of reading, beauty, etc for
+    completeness of translation
+  \end{itemize}
+}
+\begin{frame}{Goethe: paraphrastic}
+  \begin{verse}
+    Over all of the hills \\
+    Peace comes anew, \\
+    The woodland stills \\
+    All through; \\ 
+    The birds make no sound on the bough. \\
+    Wait a while, \\
+    Soon now \\
+    Peace comes to you. \\
+  \end{verse}
+  \attrib{John Whaley}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item What it preserves --- rhyme scheme, in a way
+  \item Reordering of lines, change of tense to force rhymes
+  \item Loses largest scale (summits to hills, again to force a rhyme)
+    --- but progression of scale change is preserved
+  \item But as a poem on its own, it reads well
+  \item Completely doable to do a translation in this style
+    computationally
+  \end{itemize}
+}
+\section{Computational background}
+\begin{frame}{Modeling language}
+  \begin{itemize}
+  \item Cognitive models --- Chomsky
+  \item Statistical models as an approximation
+  \item Monolingual and bilingual corpuses
+  \end{itemize}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Humans are good at learning languages, but why?
+  \item Chomsky's theory --- `universal grammar', innate language
+    faculty that `knows' the rules of language
+  \item But exactly {\it what} it is eludes us, so can't model it
+    computationally
+  \item Instead, approximate it --- mimic it in such a way that it
+    seems close to indistinguishable from the real thing
+  \item Best to do this using a statistical model --- given a large
+    sample of text, should be able to estimate the probability of a
+    given word or sentence, and choose the highest probability option
+  \item In MT, need to estimate both the probability of words in one
+    language, and probability of words being translated from one
+    language to another
+  \end{itemize}
+}
+\begin{frame}{Statistical MT}
+  By Bayesian decomposition:
+  \begin{equation}
+    \Pr(e|f) = \frac{\Pr(e)\Pr(f|e)}{\Pr(f)}
+  \end{equation}
+  $\Pr(f)$ remains constant, so:
+  \begin{equation}
+    \Pr(e|f) = \Pr(e) \Pr(f|e)
+  \end{equation}
+  \begin{exampleblock}{}
+    \begin{tabular}{l l}
+      {\bf Language model} & $\Pr(e)$ \\
+      {\bf Alignment model} & $\Pr(f|e)$ \\
+    \end{tabular}
+  \end{exampleblock}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Want to translate a foreign sentence $f$ into an English
+    sentence $e$
+  \item Want to maximize the probability that a chosen $e$ is a
+    correct translation of $f$ (LHS)
+  \item Intuitively --- probability that a translator will produce $e$
+    given $f$
+  \item LHS is hard to model --- use Bayes' rule to decompose into
+    RHS. Denominator is same for all $e$, so simplify equation
+  \item Gives two new probability distributions to model --- language
+    model and alignment model
+  \item Language model makes output sound fluent
+  \item Alignment model makes sure foreign words are translated to
+    correct English words
+  \end{itemize}
+}
+
+\section{Hypotheses}
+\begin{frame}{Hypotheses}
+  \begin{block}{1. Language model}
+    Training the language and alignment models on a poetic corpus
+    improves poetic qualities of output translation.
+  \end{block}
+  \begin{block}{2. Sentence alignment}
+    Altering sentence alignment for poetic works will improve
+    line-by-line translation quality.
+  \end{block}
+  \begin{block}{3. Post-processing}
+    Poetic characteristics can be recovered by post-processing of the
+    output translation.
+  \end{block}
+\end{frame}
+
+\begin{frame}{Language model}
+  \begin{itemize}
+  \item Estimate the probability of a sequence of words
+    $W = w_1, w_2, \dots w_n$ by Markov assumption:
+       $$ \Pr(w_n | w_1 \dots w_{n-1}) \approx \Pr(w_n|w_{n-m} \dots
+       w_{n-1})$$
+     \item Hypothesis: look to choose more poetic corpus
+  \end{itemize}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Language model used to make output sound fluent --- want most
+    statistically likely output
+  \item To estimate probability of a sequence of words: Markov
+    assumption, probability of last word is only affected by
+    probability of some history of previous words
+  \item If we want poetic sounding output, makes sense that we'd need
+    poetic sounding input --- for Euro languages, EuroParl tends to be
+    used. Not poetic!
+  \item Alignment model and language model could both be used here ---
+    but we need bilingual corpus for alignment model, which is hard to
+    get
+  \item So... I built a monolingual corpus myself for the language
+    model. Scrape Project Gutenberg.
+  \end{itemize}
+}
+
+\begin{frame}{Sentence alignment}
+  % Definitely some pretty picture here
+  \begin{verse}
+      one's not half two. It's two are halves of one: \\
+      which halves reintegrating,shall occur \\
+      no death and any quantity;but than \\
+      all numerable mosts the actual more
+    \attrib{ee cummings}
+  \end{verse}
+\end{frame}
+\begin{frame}{Sentence alignment}
+  \begin{verse}
+    Sunlight pouring across your skin, your shadow \\
+    >[0.55\linewidth] flat on the wall. \\
+    The dawn was breaking the bones of your heart like twigs. \\
+    You had not expected this, \\
+    the bedroom gone white, the astronomical light \\
+    >[0.2\linewidth] pummeling you in a stream of fists.
+    \attrib{Richard Siken}
+  \end{verse}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Sentence alignment needed for statistical MT --- generally
+    sentences will be translated roughly to each other
+  \item Sentence boundaries in prose clearly defined --- full stops,
+    question marks, etc
+  \item But in poetry, line breaks can indicate end of sentence, too
+  \item Hypothesis: split into two types of poems, and align like that
+  \end{itemize}
+}
+
+\begin{frame}{Post-processing}
+  \begin{itemize}
+  \item Recover poetic characteristics by post-processing
+  \item Non-poetic $\rightarrow$ poetic English translation system
+  \item But how to identify poetic characteristics to preserve?
+  \end{itemize}
+\end{frame}
+\note{
+  \begin{itemize}
+  \item Genzel et al. used hypothesis constraints to limit output
+    translations to those with eg. certain meter
+  \item Solution could be simpler --- implement MT system from
+    non-poetic to poetic
+  \item Identifying characteristics: some work on finding stress from
+    dictionaries and speech synthesis, rhyme from unsupervised learning
+  \end{itemize}
+}
+\section{Conclusion}
+\begin{frame}{Where to next?}
+  \begin{itemize}
+  \item Implementation of hypotheses --- Moses? GIZA?
+  \item Applying to other MT systems --- neural networks \\(Google Translate)
+  \item Preserving contextual content, emotions
+  \end{itemize}
+\end{frame}
+\begin{frame}
+  \quot{Poetry is that which is lost in translation, \\ Unless we use
+    a computational calculation.}{Soon?}
+\end{frame}
+
+\begin{frame}{Want to know more?}
+  \begin{itemize}
+  \item Report and poster in Einstein
+  \item \url{blog.andm.io/post/emc}
+  \item  \url{mandrejczuk@protonmail.com}
+  \end{itemize}
+\end{frame}
+\end{document}
+

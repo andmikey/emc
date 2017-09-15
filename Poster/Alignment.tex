@@ -1,0 +1,22 @@
+\paragraph{}{An alignment model is used to translate words or phrases
+  from a foreign language into our target language. With a phrase-based
+  translation system, we segment our input and output text into
+  aligned phrases, and use these to build a probability
+  distribution. We estimate this probability distribution by expanding $\Pr(f|e)$:
+  $$\Pr(\bar{f}_1^I | \bar{e}_1^I) = \prod_{i=1}^j
+  \phi(\bar{f}_i | \bar{e}_i) \ d(\text{start}_i - \text{end}_{i-1} -
+  1) $$}
+\paragraph{}{I hypothesize that we can separate poems into two
+  different classes, which should have different alignment models
+  applied to them, specifically with reference to sentence
+  boundaries:}
+\begin{enumerate}
+\item Poems whose sentences can be treated in the same way as prose: standard sentence boundaries can be used to segment sentences.
+\item Poems whose sentence boundaries are marked by line-endings,
+  rather than punctuation.
+\end{enumerate}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Poster"
+%%% End:

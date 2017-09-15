@@ -1,0 +1,35 @@
+\paragraph{A statistical model of language}{All these
+  rule-based, computational models of cognitive grammar are bound to
+  be incomplete: simply put, we do not yet have enough knowledge of
+  how the brain interprets and creates language --- what internal
+  structures it uses, and so forth --- to be able to express these
+  methods and structures computationally. So we compromise. Natural
+  language processing and generation (of the kind needed in machine
+  translation) doesn't require fully emulating human use of language:
+  it only needs to approximate it, mimic it in such a way that it
+  seems close to indistinguishable from the real thing. A good way of
+  doing this is a probabilistic approach.}
+\paragraph{}{The best way to explain the probabilistic model is in
+  context: so let's take a look at the statistical model of machine
+  translation. Say we want to translate a foreign sentence $f$ into an
+  English sentence $e$. Then, by a probabilistic model\cite{smt}, we
+  want our translation engine to maximize the probability that a given
+  English sentence is the correct translation of the foreign sentence:
+  that is, maximize $ \Pr(e|f) $. Intuitively, we can interpret this
+  probability as the probability a translator will produce $e$ in the
+  target language when presented with $f$ in the foreign
+  language.\cite{ibm}}
+\paragraph{}{Modeling this probability distribution is difficult: we
+  can simplify the problem by applying Bayes' theorem\cite{bayes}: by
+  Bayesian decomposition, we can rewrite $\Pr(e|f)$ as:
+  $$ \Pr(e|f)=\frac{\Pr(e)\Pr(f|e)}{\Pr(f)}$$ Note that the
+  denominator $\Pr(f)$ does not depend on $e$, and so is the same for
+  all possible values of $e$: therefore we can just simplify our
+  equation to be: $$ \Pr(e|f)= \Pr(e)\Pr(f|e)$$ This gives us two new
+  variables to maximize: $\Pr(e)$, the {\it language model}, and
+  $\Pr(f|e)$, the {\it alignment model}.}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../Report"
+%%% End:

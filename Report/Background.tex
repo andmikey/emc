@@ -1,0 +1,134 @@
+\section*{Background}
+\quot{Prose: words in their best order; \\poetry: the best words in
+  the best order}{Samuel Taylor Coleridge}
+
+\paragraph{}{Computational linguistics (or Natural Language
+  Processing, NLP) is defined by the Association for Computational
+  Linguistics as: `the scientific study of language from a
+  computational perspective' \cite{acl-def}. The field has its origins
+  in the United States, immediately following the Second World
+  War. Warren Weaver, an American scientist, wrote a now-famous
+  memorandum \cite{weaver} in 1947 to Norbert Wiener at MIT: }
+\begin{displayquote}
+  I have wondered if it were unthinkable to design a computer which
+  would translate. Even if it would translate only scientific material
+  (where the semantic difficulties are very notably less), and even if
+  it did produce an inelegant (but intelligible) result, it would seem
+  to me worth while.
+\end{displayquote}
+\paragraph{}{Weaver made four core arguments about possible approaches
+  to machine translation (MT)\cite{core}:}
+\begin{enumerate}
+\item The problem of one word having multiple meanings can be solved
+  by looking at the $n$ words (or just nouns) around it to
+  disambiguate from context.
+
+\item A theorem proved in 1943 by McCulloch and Pitts \cite{pitts}
+  suggests that ``a robot\ldots is capable of deducing any legitimate
+  conclusion from a finite set of premises''. Under the assumption
+  that language is logical, language understanding may be possible.
+
+\item Translation problems can be looked at as a cryptographic
+  process: ``a book written in Chinese is simply a book written in
+  English which was coded into the `Chinese code','' and cryptographic
+  methods can therefore be used to translate text.
+
+\item Instead of translating language-to-language, we should descend
+  ``down to the common base of human communication --- the real but as
+  yet undiscovered universal language'' to express a concept, then
+  express it in the desired language.
+\end{enumerate}
+
+\paragraph{}{Weaver's theorems, while not necessarily state-of-the-art
+  today, were enough to fuel an increase in interest for language
+  processing and machine translation. Most work in the early days was
+  military funded: it concerned Russian $\rightarrow$ English (and to
+  a minor extent English $\rightarrow$ Russian) translation, intended for use by the
+  United States government against the USSR during the Cold War
+  \cite{retro}. Its development continued to the mid-1960s, although
+  it was strongly confined by the computing power available; systems
+  were primarily rule-based, using limited dictionaries. Researchers
+  of the famous Georgetown experiment\footnote{A demonstration of
+    machine translation in 1954, which translated 60 Russian sentences
+    to English with quite astounding accuracy and drew a large amount
+    of press attention: however, the methodology was flawed and the
+    system was not nearly as impressive as it seemed.} estimated that
+  machine translation would be a solved problem in three to five years
+  \cite{georgetown}. However, the development was not fast enough: in
+  1966 the Automatic Language Processing Advisory Committee (ALPAC)
+  published a skeptical report on the future of machine
+  translation\cite{alpac}:}
+\begin{displayquote}
+  At present [MT] serves no useful purpose without postediting
+  \textelp{} we will only have adequate mechanical translation when the
+  machine can ``understand'' what it is translating \textelp{} perhaps our
+  attitude might be different if there were some pressing need for
+  machine translation, but we find none.
+\end{displayquote}
+
+\paragraph{}{The report did not bode well for NLP research: none of
+  its nine recommendations supported any sort of research in MT or NLP
+  \cite{alpac-crit}. Research in MT stalled, especially in the
+  US. Work began to be done in applying linguistics, rather than raw
+  computing power, to problems. A great deal of work was done in
+  natural language understanding (for example with
+  SHRDLU\cite{shrdlu}). Eventually, by the 1980s, developments in
+  corpus linguistics and machine learning began to reawaken the
+  slumbering MT community. The focus of research shifted from closed
+  to open domains, and from hand-written rules to corpus-based
+  statistical approaches \cite{shift}. In 1990, IBM published a
+  seminal work in the field, describing progressively more complex
+  statistical models for word-based machine translation \cite{ibm}. As
+  research boomed, so too did commercial usage of MT systems: the most
+  famous examples of which being SYSTRAN (used by the US Department of
+  Defense) and METEO (used for English-French weather bulletin
+  translation in Canada). }
+
+\paragraph{}{The fields of machine translation and computational
+  linguistics continue to grow today. Most major technology companies
+  (Apple, Google, Facebook, etc.) have dedicated research departments
+  for computational linguistics. Some uses are ubiquitous: Siri,
+  Google Translate, Cortana. The rapid pace of development is
+  underscored by the speed and scale of improvements in related fields
+  such as machine learning. Some of today's most advanced methods of
+  machine translation come close to achieving human-level accuracy in
+  translation tasks \cite{gnmt}.}
+
+\paragraph{}{But, machine translation is still mostly used for
+  translating non-fiction text like scientific papers or newspaper
+  articles. So why do we want to translate poetry? A couple of reasons
+  come to mind, which specifically motivated my interest in this
+  problem:}
+\begin{itemize}
+\item Translated poems have historically built up the rich tapestry of
+  English literature: where would we be without Dante, Virgil, Homer?
+  The ability to computationally translate poems may allow yet more
+  foreign poems to enter the consciousness of the English language
+  \cite{hist}.
+\item Furthering the previous point, there are many poems written in
+  languages which do not have an active, or for that matter any,
+  translation community. Machine translation techniques could be used
+  to translate these poems where humans cannot.\footnote{For
+    discussion of machine translation for resource-poor languages, see
+    Nakov \& Ng (2014) \cite{ng}, Avramidis \& Koehn (2008).
+    \cite{avr}}
+\item Some argue that a truly faithful translation requires the
+  translator to have intimate familiarity with both the source and
+  target languages \cite{fam}: if a computer could do the job of being
+  familiar with one of the languages, it would lighten the cognitive
+  load on the translator and perhaps allow for a better-quality
+  translation.
+\item Translated poems are often worth reading in their own right:
+  ``when translator and original are in tune\ldots a third poem is
+  created'' \cite{hist}; indeed, it would be an interesting creative
+  exercise to analyze the poems which result from machine translation.
+\item The hope that a more computational, quantitative treatment of
+  poetry and poetic analysis will encourage the more
+  scientifically-minded to explore poetry and the beauty contained
+  therein.
+\end{itemize}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "Report"
+%%% End:
